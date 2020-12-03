@@ -1,5 +1,7 @@
 package com.example.myapplication;
 
+import android.animation.PropertyValuesHolder;
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
@@ -11,12 +13,22 @@ import androidx.annotation.Nullable;
 
 public class PmView extends View {
 
+    private static final String PROPERTY_SWEEP = "PROPERTY_SWEEP";
+    private static final String PROPERTY_TRANSACTION = "PROPERTY_TRANSACTION";
     private Paint pmCircle;
     private Paint pmCircleIn;
     private Paint pmEye;
     private int dotNum = 3;
     private int colorCircle;
     private int colorEye;
+
+    private float left;
+    private float right;
+    private float top;
+    private float bottom;
+
+    private float startAngle;
+    private float sweepAngle;
 
     public PmView(Context context) {
         super(context);
@@ -59,6 +71,24 @@ public class PmView extends View {
         pmEye.setColor(colorEye);
     }
 
+    public void createAnimation() {
+        PropertyValuesHolder propertySweep = PropertyValuesHolder.ofInt(PROPERTY_SWEEP, 0, 30);
+        PropertyValuesHolder propertyTransaction = PropertyValuesHolder.ofInt(PROPERTY_TRANSACTION, 0, 200);
+        ValueAnimator animator = new ValueAnimator();
+        animator.setValues(propertySweep, propertyTransaction);
+        animator.setDuration(2000);
+        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                startAngle = (int) animation.getAnimatedValue(PROPERTY_SWEEP);
+                sweepAngle = 360 - startAngle*2;
+                left = (int) animation.getAnimatedValue(PROPERTY_TRANSACTION);
+                invalidate();
+            }
+        });
+        animator.start();
+    }
+
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
@@ -68,11 +98,12 @@ public class PmView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         float square = 200;
-        float left = 50;
-        float right = 50 + square;
-        float top = 50;
-        float bottom = 50 + square;
-        canvas.drawArc(left, top, right, bottom, 40, 280, true, pmCircle);
+        left = 50;
+        right = 50 + square;
+        top = 50;
+        bottom = 50 + square;
+        createAnimation();
+        canvas.drawArc(left, top, right, bottom, startAngle, sweepAngle, true, pmCircle);
 
         float eyeCx = left + 100;
         float eyeCy = top + 60;

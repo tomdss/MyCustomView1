@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="pacman_circle">#F2F000</color>
     <color name="pacman_eye">#000000</color>
+    <color name="color_808080">#808080</color>
 </resources>

@@ -1,8 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <attr name="color" format="color"/>
+    <attr name="widthStroke" format="integer"/>
+    <attr name="radius" format="integer"/>
+
     <declare-styleable name="PmView">
         <attr name="dotNum" format="integer" />
         <attr name="circleColor" format="color" />
         <attr name="eyeColor" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="TextPolicyView">
+        <attr name="textNamePolicy" format="string" />
+        <attr name="textContentPolicy" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="CircleView">
+        <attr name="color" />
+        <attr name="widthStroke"/>
+        <attr name="radius"/>
     </declare-styleable>
 </resources>
