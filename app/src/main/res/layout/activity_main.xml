@@ -10,7 +10,7 @@
         android:id="@+id/pmView"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:visibility="visible"
+        android:visibility="gone"
         app:circleColor="@color/pacman_eye"
         app:dotNum="7"
         app:eyeColor="@color/pacman_circle"
@@ -19,24 +19,19 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.example.myapplication.TextPolicyView
+        android:id="@+id/tvPolicy"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@id/pmView"
         app:textContentPolicy="The Fly Boy"
-        app:textNamePolicy="Harry"
-        android:visibility="gone"/>
+        app:textNamePolicy="Harry" />
 
-    <com.example.myapplication.CircleView
+    <com.example.myapplication.CircleClockView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/circle_view"
-        android:layout_centerInParent="true"
-        android:visibility="visible"
-        app:widthStroke="4"
-        app:radius="150"
-        app:color="@color/pacman_circle"
-        app:layout_constraintTop_toBottomOf="@id/pmView"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/tvPolicy" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
